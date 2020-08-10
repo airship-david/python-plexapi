@@ -1263,5 +1263,11 @@ class Collections(PlexPartialObject):
         """ Set :class:`~plexapi.media.Poster` to :class:`~plexapi.video.Video` """
         art.select()
 
-    # def edit(self, **kwargs):
-    #    TODO
+    def edit(self, **kwargs):
+        """ Edit a collection. (Note: agent is required). See :class:`~plexapi.library.Collection` for example usage.
+
+            Parameters:
+                kwargs (dict): Dict of settings to edit.
+        """
+        part = '/library/metadata/%s?%s' % (self.ratingKey, urlencode(kwargs))
+        self._server.query(part, method=self._server._session.put)
